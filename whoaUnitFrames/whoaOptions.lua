@@ -4,7 +4,7 @@
 local sliderGroupY = -300
 
 
---	UI PANELS
+-- UI PANELS
 whoaGUI = {};
 whoaGUI.panel = CreateFrame( "Frame", "whoaGUI", UIParent );
 whoaGUI.panel.name = "whoa UnitFrames";
@@ -26,7 +26,7 @@ SlashCmdList['RELOAD'] = function() ReloadUI() end
 LASH_RELOAD1 = '/rl'
 
 
---	LOAD
+-- LOAD
 function whoa:Init(event, addon, ...)
     if (event == "ADDON_LOADED" and addon == "whoaUnitFrames") then
         print("whoa UnitFrames is now loaded. Use /wuf to open options.")
@@ -65,37 +65,37 @@ function whoa:Init(event, addon, ...)
     TargetFrame:SetScale(whoaSaves.scale)
     FocusFrame:SetScale(whoaSaves.scale)
 
---	FRAMES DARK OPTION
+-- FRAMES DARK OPTION
     for i, v in pairs({
-    --	Frames
+    -- Frames
         PlayerFrameTexture, PlayerFrameAlternateManaBarBorder, PlayerFrameAlternateManaBarLeftBorder, PlayerFrameAlternateManaBarRightBorder,
         PetFrameTexture, TargetFrameTextureFrameTexture,  FocusFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
         FocusFrameToTTextureFrameTexture, CastingBarFrame.Border,  FocusFrameSpellBar.Border, TargetFrameSpellBar.Border,
-    --	Pary Frames
+    -- Pary Frames
         PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture, PartyMemberFrame4Texture, PartyMemberFrame1PetFrameTexture,
         PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture,
-    --	Pary Frames
+    -- Pary Frames
         -- CompactRaidFrameContainerBorderFrameTopTexture, CompactRaidFrame
-    --	DK
+    -- DK
         RuneButtonIndividual1Texture, RuneButtonIndividual2Texture,  RuneButtonIndividual3Texture,  RuneButtonIndividual4Texture,  RuneButtonIndividual5Texture,
         RuneButtonIndividual6Texture,  RuneButtonIndividual7Texture,
-    --	Paladin
+    -- Paladin
         -- PaladinPowerBarFrameRune1Texture, PaladinPowerBarFrameRune2Texture, PaladinPowerBarFrameRune3Texture, PaladinPowerBarFrameRune4Texture, PaladinPowerBarFrameRune5Texture, PaladinPowerBarFrameRune6Texture,
-    --	rogu / Druid
+    -- rogu / Druid
         ComboPointPlayerFrame.Background, ComboPointPlayerFrame.Combo1.PointOff, ComboPointPlayerFrame.Combo2.PointOff, ComboPointPlayerFrame.Combo3.PointOff,
         ComboPointPlayerFrame.Combo4.PointOff, ComboPointPlayerFrame.Combo5.PointOff, ComboPointPlayerFrame.Combo6.PointOff,
-    --	Shaman
+    -- Shaman
         TotemFrameTotem1Background, TotemFrameTotem1Texture,
-        PartyMemberFrame1Texture, PartyMemberFrame2Texture,	PartyMemberFrame3Texture,PartyMemberFrame4Texture, PartyMemberFrame1PetFrameTexture,
+        PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture,PartyMemberFrame4Texture, PartyMemberFrame1PetFrameTexture,
         PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture,
-    --	Warlock
+    -- Warlock
         -- WarlockPowerFrameShard1Texture,
 
         })
     do
         v:SetVertexColor(whoaSaves.darkentextures, whoaSaves.darkentextures, whoaSaves.darkentextures)
     end
-    --	Compact Raid Frame
+    -- Compact Raid Frame
     -- for _, region in pairs({CompactRaidFrameContainerBorderFrame:GetRegions()}) do
         -- if region:IsObjectType("Texture") then
             -- region:SetVertexColor(whoaSaves.darkentextures, whoaSaves.darkentextures, whoaSaves.darkentextures)
@@ -141,7 +141,7 @@ if ( whoaSaves.customStatusText == 1 ) then
         FocusFrameTextureFrameManaBarText:Hide()
     end
 
---	TARGET / FOCUS CASTBAR FIX
+-- TARGET / FOCUS CASTBAR FIX
     -- if ( whoaSaves.castbarFix == 1 ) then
         -- TargetFrameSpellBar:ClearAllPoints()
         -- TargetFrameSpellBar:SetPoint("CENTER", TargetFrame, "CENTER", -15,-100)
@@ -196,7 +196,7 @@ if ( whoaSaves.customStatusText == 1 ) then
         end
 
 
---	END OF whoa
+-- END OF whoa
     end
 end
 -- create addon frame
@@ -210,7 +210,7 @@ whoaUIframe:RegisterEvent("ADDON_LOADED")
 
 
 
---	PORTRAIT FUNC
+-- PORTRAIT FUNC
 function whoa_Portrait (self)
     if ( whoaSaves.classPortraits == 1 ) then
         local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))]
@@ -227,8 +227,8 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
 
 
 
---	CREATE UI
---	//
+-- CREATE UI
+-- //
 
     function whoa:CreateGUI(frame)
     -- General
@@ -241,7 +241,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
     -- line:SetPoint("CENTER", whoa)
 
 
---	BUFF SACLER SLIDER
+-- BUFF SACLER SLIDER
     local CreateSliderBuff = whoa:CreateSliderBuff(whoaGUI.panel, "whoaBuffScaler", "General Frame Scale", 17, 30, whoaSaves.smallAuraSize, 60, -290)
         whoaBuffScaler:SetScript("OnValueChanged", function(self, value)
         whoaSaves.smallAuraSize = (value)
@@ -249,7 +249,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
         getglobal(whoaBuffScaler:GetName() .. 'Text'):SetText("Buff Size: (" .. format("%.2f",whoaSaves.smallAuraSize) .. ")");
     end)
 
---	BUFF SACLER SLIDER - [RESET]
+-- BUFF SACLER SLIDER - [RESET]
     local whoaBuffScalerReset = whoa:CreateButton(whoaGUI.panel, "whoaBuffScalerReset", "Reset", 55, 22, 100, -320)
         whoaBuffScalerReset:SetScript("OnClick", function(self)
         whoaSaves.smallAuraSize = 17
@@ -257,32 +257,32 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
     end)
 
 -- /script TargetFrameSpellBar.Border:Hide()
---	FRAMES DARK SLIDER
+-- FRAMES DARK SLIDER
     local darkSlider = whoa:CreateSliderx(whoaGUI.panel, "darkSlider", "Darken Frame Textures", 0, 1, (whoaSaves.darkentextures), 60,-155 + sliderGroupY)
     darkSlider:SetScript("OnValueChanged", function(self, value)
         for i, v in pairs({
-    --	Frames
+    -- Frames
         PlayerFrameTexture, PlayerFrameAlternateManaBarBorder, PlayerFrameAlternateManaBarLeftBorder, PlayerFrameAlternateManaBarRightBorder,
         PetFrameTexture, TargetFrameTextureFrameTexture,  FocusFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
         FocusFrameToTTextureFrameTexture, CastingBarFrame.Border,  FocusFrameSpellBar.Border, TargetFrameSpellBar.Border,
-    --	Pary Frames
+    -- Pary Frames
         PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture, PartyMemberFrame4Texture, PartyMemberFrame1PetFrameTexture,
         PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture,
-    --	Pary Frames
+    -- Pary Frames
         -- CompactRaidFrameContainerBorderFrameTopTexture, CompactRaidFrame
-    --	DK
+    -- DK
         RuneButtonIndividual1Texture, RuneButtonIndividual2Texture,  RuneButtonIndividual3Texture,  RuneButtonIndividual4Texture,  RuneButtonIndividual5Texture,
         RuneButtonIndividual6Texture,  RuneButtonIndividual7Texture,
-    --	Paladin
+    -- Paladin
         -- PaladinPowerBarFrameRune1Texture, PaladinPowerBarFrameRune2Texture, PaladinPowerBarFrameRune3Texture, PaladinPowerBarFrameRune4Texture, PaladinPowerBarFrameRune5Texture, PaladinPowerBarFrameRune6Texture,
-    --	rogu / Druid
+    -- rogu / Druid
         ComboPointPlayerFrame.Background, ComboPointPlayerFrame.Combo1.PointOff, ComboPointPlayerFrame.Combo2.PointOff, ComboPointPlayerFrame.Combo3.PointOff,
         ComboPointPlayerFrame.Combo4.PointOff, ComboPointPlayerFrame.Combo5.PointOff, ComboPointPlayerFrame.Combo6.PointOff,
-    --	Shaman
+    -- Shaman
         TotemFrameTotem1Background, TotemFrameTotem1Texture,
-        PartyMemberFrame1Texture, PartyMemberFrame2Texture,	PartyMemberFrame3Texture,PartyMemberFrame4Texture, PartyMemberFrame1PetFrameTexture,
+        PartyMemberFrame1Texture, PartyMemberFrame2Texture, PartyMemberFrame3Texture,PartyMemberFrame4Texture, PartyMemberFrame1PetFrameTexture,
         PartyMemberFrame2PetFrameTexture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture,
-    --	Warlock
+    -- Warlock
         -- WarlockPowerFrameShard1Texture,
             })
         do
@@ -330,7 +330,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
         getglobal(darkSlider:GetName() .. 'Text'):SetText("Darkness Value");
     end)
 
---	FRAMES DARK SLIDER - [RESET]
+-- FRAMES DARK SLIDER - [RESET]
     local darkSliderReset = whoa:CreateButton(whoaGUI.panel, "darkSliderResetx", "Reset", 55, 22, 100, -180 + sliderGroupY)
     darkSliderResetx:SetScript("OnClick", function(self)
         for i, v in pairs({PlayerFrameTexture, PetFrameTexture, TargetFrameTextureFrameTexture,  FocusFrameTextureFrameTexture,
@@ -346,7 +346,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
 
 
 
---	FRAMES SIZE SLIDER
+-- FRAMES SIZE SLIDER
     local BuffSizeSlider = whoa:CreateSlider(whoaGUI.panel, "BuffSizeSlider", "General Frame Scale", 0.5, 1.5, whoaSaves.scale, 60, -80  + sliderGroupY)
         BuffSizeSlider:SetScript("OnValueChanged", function(self, value)
         PlayerFrame:SetScale(value)
@@ -356,7 +356,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
         getglobal(BuffSizeSlider:GetName() .. 'Text'):SetText("Current Scale: (" .. format("%.2f",whoaSaves.scale) .. ")");
     end)
 
---	FRAMES SIZE SLIDER - [RESET]
+-- FRAMES SIZE SLIDER - [RESET]
     local BuffSizeReset = whoa:CreateButton(whoaGUI.panel, "BuffSizeReset", "Reset", 55, 22, 100, -110 + sliderGroupY)
         BuffSizeReset:SetScript("OnClick", function(self)
         PlayerFrame:SetScale(1)
@@ -366,7 +366,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
     end)
 
 
---	CUSTOM STATUS TEXT (3)
+-- CUSTOM STATUS TEXT (3)
     myCheckButton = createCheckbutton(whoaGUI.panel, 40, -70, "Whoa status text");
     myCheckButton.tooltip = "If this is checked, 'whoa status text' will display unit frames values in Millions.";
     myCheckButton:SetScript("OnClick",
@@ -381,7 +381,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
    end );
     -- myCheckButton:SetScript("OnClick", whoa_Portrait)
 
---	CLASS COLOR CHECKBUTTON (2)
+-- CLASS COLOR CHECKBUTTON (2)
     myCheckButton = createCheckbutton(whoaGUI.panel, 40, -100, "Class colored HP bars.");
     myCheckButton.tooltip = "If this is checked, will display class colored HP bars..";
     myCheckButton:SetScript("OnClick",
@@ -432,7 +432,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
         end
     end );
 
---	SHOW MAX HEALTH
+-- SHOW MAX HEALTH
     myCheckButton = createCheckbutton(whoaGUI.panel, 40, -130, "Show max health - DISABLED");
     -- myCheckButton.tooltip = "If this is checked, 'whoa status text' will display units max. HP.";
     myCheckButton.tooltip = "Function temporary disabled.";
@@ -448,9 +448,9 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
     -- whoaCheckButton4:Disable(true)
 
 
---	///
+-- ///
 
---	HIT INDICATORS CHECKBOX
+-- HIT INDICATORS CHECKBOX
     myCheckButton = createCheckbutton(whoaGUI.panel, 320, -70, "Hide Hit Indicators");
     myCheckButton.tooltip = "If this is checked, 'whoa status text' will display units max. HP.";
     myCheckButton:SetScript("OnClick",
@@ -464,7 +464,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
     );
     -- whoaCheckButton5:Disable(true)
 
---	DISABLE POWERBAR ANIMATIONS
+-- DISABLE POWERBAR ANIMATIONS
     myCheckButton = createCheckbutton(whoaGUI.panel, 320, -100, "Disable statusbar animations");
     myCheckButton.tooltip = "If this is checked, 'whoa status text' will hide Player frame status bar animations.";
     myCheckButton:SetScript("OnClick",
@@ -499,7 +499,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
     -- whoaCheckButton6:Disable(true)
 
 
---	DISABLE REST GLOW
+-- DISABLE REST GLOW
     myCheckButton = createCheckbutton(whoaGUI.panel, 320, -130, "Disable rest glow");
     myCheckButton.tooltip = "If this is checked, 'whoa status text' will hide Player frame rest glow.";
     myCheckButton:SetScript("OnClick",
@@ -545,7 +545,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
 
 
 
---	TARGET / FOCUS FRAME CASTBAR FIX
+-- TARGET / FOCUS FRAME CASTBAR FIX
     myCheckButton = createCheckbutton(whoaGUI.panel, 320, -190, "Target / Focus castbar fix - DISABLED");
     myCheckButton.tooltip = "If this is checked, will set target / focus frames castbar below ToT / Fot.";
     myCheckButton:SetScript("OnClick",
@@ -562,7 +562,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
 
 
 
---	BAR TEXTURE - from GhettoFrames addon.
+-- BAR TEXTURE - from GhettoFrames addon.
     local title = whoa:CreateFont(whoaGUI.panel, "title", "Bar Texture Style", 345, -360, 15)
     CreateFrame("Frame", "whoaBGselect", whoaGUI.panel, "UIDropDownMenuTemplate")
     whoaBGselect:SetPoint("CENTER", 100, -120)
