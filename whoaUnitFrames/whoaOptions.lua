@@ -1,7 +1,7 @@
 
 
 
-local sliderGroupY = -300
+local sliderGroupY = -300   -- For moving sliders grouped untill final position defined.
 
 
 -- UI PANELS
@@ -65,7 +65,7 @@ function whoa:Init(event, addon, ...)
     TargetFrame:SetScale(whoaSaves.scale)
     FocusFrame:SetScale(whoaSaves.scale)
 
--- FRAMES DARK OPTION
+-- FRAMES DARK OPTION (Under dev. Still checking for every class frames (runes / holy power / shards / etc.)
     for i, v in pairs({
     -- Frames
         PlayerFrameTexture, PlayerFrameAlternateManaBarBorder, PlayerFrameAlternateManaBarLeftBorder, PlayerFrameAlternateManaBarRightBorder,
@@ -102,6 +102,8 @@ function whoa:Init(event, addon, ...)
         -- end
     -- end
 
+        
+-- Replaces (hides/shows) blizzards unit text frames with whoas Unit text and back.
 if ( whoaSaves.customStatusText == 1 ) then
         function PlayerFrameHealthBar.LeftText:Show() end
         function PlayerFrameManaBar.LeftText:Show() end
@@ -141,7 +143,9 @@ if ( whoaSaves.customStatusText == 1 ) then
         FocusFrameTextureFrameManaBarText:Hide()
     end
 
--- TARGET / FOCUS CASTBAR FIX
+        
+-- TARGET / FOCUS CASTBAR FIX   (Old cod. should be deprecated? not needed).
+        
     -- if ( whoaSaves.castbarFix == 1 ) then
         -- TargetFrameSpellBar:ClearAllPoints()
         -- TargetFrameSpellBar:SetPoint("CENTER", TargetFrame, "CENTER", -15,-100)
@@ -471,6 +475,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
     function(self)
         if whoaCheckButton6:GetChecked() then
             whoaSaves.disableStatusPred = 1
+                -- original code from "FrameXML\UnitFrame.lua".
             PowerBarColor["RAGE"] = { r = 1.00, g = 0.00, b = 0.00, fullPowerAnim=false };
             PowerBarColor["FOCUS"] = { r = 1.00, g = 0.50, b = 0.25, fullPowerAnim=false };
             PowerBarColor["ENERGY"] = { r = 1.00, g = 1.00, b = 0.00, fullPowerAnim=false };
@@ -479,6 +484,7 @@ hooksecurefunc("PlayerFrame_ToPlayerArt", whoa_Portrait)
             PowerBarColor["INSANITY"] = { r = 0.40, g = 0, b = 0.80, atlas = "_Priest-InsanityBar"};
             PowerBarColor["FURY"] = { r = 0.788, g = 0.259, b = 0.992, atlas = "_DemonHunter-DemonicFuryBar", fullPowerAnim=false };
             PowerBarColor["PAIN"] = { r = 255/255, g = 156/255, b = 0, atlas = "_DemonHunter-DemonicPainBar", fullPowerAnim=false };
+            PowerBarColor["RUNIC_POWER"] = { r = 0.00, g = 0.82, b = 1.00, fullPowerAnim=true };    -- Extra line. Adds Statusbar Animations to DK runic power bar. (personal desire).
             PlayerFrameManaBar.FeedbackFrame:Hide()
             PlayerFrameManaBar.FullPowerFrame:Hide()
         else
@@ -735,7 +741,7 @@ editbox2:SetText("")
 end
 
 
---	FACTORY
+-- FACTORY. If possible doing something alike for "slidebars".
 local uniquealyzer = 1;
 function createCheckbutton(parent, x_loc, y_loc, displayname)
     uniquealyzer = uniquealyzer + 1;
@@ -759,7 +765,7 @@ end
 
 
 
-PowerBarColor["RUNIC_POWER"] = { r = 0.00, g = 0.82, b = 1.00, fullPowerAnim=true };
+
 
 
 
